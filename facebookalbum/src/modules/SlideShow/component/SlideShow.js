@@ -46,7 +46,7 @@ class Slideshow extends React.Component {
                     <img
                       className=' d-block w-100'
                       src={album.images[0].source}
-                      alt='album picture'
+                      alt='album'
                     />
                   </div>
                 );

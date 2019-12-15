@@ -3,7 +3,6 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import facebookAPI from './api/facebook';
 import './App.scss';
-import Albums from './modules/Albums/component/Album';
 import Login from './modules/Login/component/Login';
 import PrivateRoute from './privateRoute';
 import { getUserDataSuccess, getUserProfileSuccess } from './actions/index';

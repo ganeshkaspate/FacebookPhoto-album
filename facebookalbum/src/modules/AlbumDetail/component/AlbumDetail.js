@@ -28,7 +28,7 @@ class AlbumDetail extends React.Component {
         <hr />
         <div className='album-pictures-wrapper d-flex justify-content-center'>
           {data.map(album => {
-            return <img className='album-picture m-2' src={album.images[0].source} alt="album picture" />;
+            return <img className='album-picture m-2' src={album.images[0].source} alt="album" />;
           })}
         </div>
       </div>

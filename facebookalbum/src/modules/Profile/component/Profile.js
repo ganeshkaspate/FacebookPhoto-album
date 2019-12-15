@@ -23,7 +23,7 @@ const Profile = ({ userProfile, goToAlbums }) => {
   return (
     <div className='d-flex justify-content-center'>
       <div className='card profile-card'>
-        <img src={profileUrl} className='card-img-top img-thumbnail' alt='facebook profile photo' />
+        <img src={profileUrl} className='card-img-top img-thumbnail' alt='facebboo pic' />
         <div className='card-body'>
           <h5 className='card-title'>{name}</h5>
         </div>

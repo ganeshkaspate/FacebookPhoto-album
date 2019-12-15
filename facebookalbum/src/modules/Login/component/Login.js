@@ -60,7 +60,7 @@ class Login extends React.Component {
               <button className='btn btn-success btn-block' type='submit'>
                 <i className='fas fa-sign-in-alt'></i> Sign in
               </button>
-              <a href='#' id='forgot_pswd'>
+              <a href='/' id='forgot_pswd'>
                 Forgot password?
               </a>
               <hr />
