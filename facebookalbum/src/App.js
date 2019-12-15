@@ -21,7 +21,8 @@ class App extends React.Component {
     }
 
     facebookAPI.checkLoginStatus(response => {
-      // TODO - Figure out why loginState becomes 'unknown' on refresh, kicking back user to login page
+      console.log(response);
+      // Here I am getting status UNKNOWN even if user is logged in. 
       if (response.status !== 'connected') {
         // login error - redirect to login
         this.props.history.push('/login');
