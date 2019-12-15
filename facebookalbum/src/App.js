@@ -1,32 +1,80 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Home from './modules/Home/component/Home';
+import facebookAPI from './api/facebook';
+import './App.scss';
+import Albums from './modules/Albums/component/Album';
 import Login from './modules/Login/component/Login';
+import PrivateRoute from './privateRoute';
+import { getUserDataSuccess, getUserProfileSuccess } from './actions/index';
+import Home from './modules/Home/component/Home';
 
+class App extends React.Component {
 
+  state = {
+    authenticated: false
+  };
 
+  componentDidMount() {
+    if (localStorage.getItem('accessToken')) {
+      this.setState({ authenticated: true });
+    }
 
+    facebookAPI.checkLoginStatus(response => {
+      // TODO - Figure out why loginState becomes 'unknown' on refresh, kicking back user to login page
+      if (response.status !== 'connected') {
+        // login error - redirect to login
+        this.props.history.push('/login');
+      }
+    });
+  }
 
-function App() {
-  return (
-    <div className="App-container">
-      <Switch>
-        <Route path='/login'>
-          <Login />
-        </Route>
-        <Route path='/'>
-          <Redirect
-            to={{
-              pathname: '/facebook-albums'
-            }}
-          />
-        </Route>
-      </Switch>
-    </div >
-  );
+  componentDidUpdate(prevProps) {
+    const { isLoggedIn } = this.props;
+    if (isLoggedIn && isLoggedIn !== prevProps.isLoggedIn) {
+      // fetch user data like albums, etc
+      facebookAPI.getAlbums(response => {
+        const albums = response.albums || { data: [] };
+        this.props.gotUserData(albums.data);
+
+        facebookAPI.getUserProfile(response => {
+          this.props.gotUserProfile(response);
+          this.props.history.push('/facebook-albums');
+        });
+      });
+    }
+  }
+  
+  render() {
+    const { isLoggedIn } = this.props;
+
+    return (
+      <div className='App container'>
+        <Switch>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <PrivateRoute path='/facebook-albums' authenticated={isLoggedIn}>
+            <Home />
+          </PrivateRoute>
+          <Route path='/'>
+            <Redirect
+              to={{
+                pathname: '/facebook-albums'
+              }}
+            />
+          </Route>
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({ isLoggedIn: state.userData.isLoggedIn });
+
+export default withRouter(
+  connect(mapStateToProps, {
+    gotUserData: getUserDataSuccess,
+    gotUserProfile: getUserProfileSuccess
+  })(App)
+);

@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
-const initialState = {
-    isloggedIn : false
-}
-
+import userData from './user';
+import albums from './albums';
 export default combineReducers({
-    initialState
+  userData,
+  albums
 });

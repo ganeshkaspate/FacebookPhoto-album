@@ -3,8 +3,24 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
 import '../styles/Login.scss';
+import { facebookLoginSuccess, facebookLoginError } from '../../../actions/index';
+import facebookAPI from '../../../api/facebook';
+
 
 class Login extends React.Component {
+
+
+  logIn = () => {
+    facebookAPI.login(response => {
+      console.log('Login response', response);
+      
+      if (response.status === 'connected') {
+        this.props.facebookLoginSuccess();
+      } else {
+        this.props.facebookLoginError();
+      }
+    });
+  };
 
     render() {
         return (
@@ -58,4 +74,7 @@ class Login extends React.Component {
       }
     }
 
-export default connect(null, null) (Login);
+    export default connect(null, {
+      facebookLoginSuccess,
+      facebookLoginError
+    })(Login);
