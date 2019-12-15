@@ -47,7 +47,7 @@ class Login extends React.Component {
                 className='form-control'
                 placeholder='Email address'
                 required=''
-                autofocus=''
+                autoFocus=''
               />
               <input
                 type='password'
