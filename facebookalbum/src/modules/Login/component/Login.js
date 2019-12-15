@@ -48,6 +48,7 @@ class Login extends React.Component {
                 placeholder='Email address'
                 required=''
                 autoFocus=''
+                autoComplete="email"
               />
               <input
                 type='password'
@@ -55,6 +56,7 @@ class Login extends React.Component {
                 className='form-control'
                 placeholder='Password'
                 required=''
+                autoComplete="password"
               />
     
               <button className='btn btn-success btn-block' type='submit'>

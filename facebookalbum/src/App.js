@@ -20,7 +20,6 @@ class App extends React.Component {
     }
 
     facebookAPI.checkLoginStatus(response => {
-      console.log(response);
       // Here I am getting status UNKNOWN even if user is logged in. 
       if (response.status !== 'connected') {
         // login error - redirect to login

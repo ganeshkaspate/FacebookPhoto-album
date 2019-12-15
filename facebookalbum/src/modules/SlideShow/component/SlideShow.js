@@ -28,12 +28,13 @@ class Slideshow extends React.Component {
             className='carousel slide'
             data-ride='carousel'
             data-interval='2000'>
-            <ol class='carousel-indicators'>
+            <ol className='carousel-indicators'>
               {data.map((albumPicture, i) => {
                 return (
                   <li
                     data-target='#albumSlideshow'
                     data-slide-to={i}
+                    key={i}
                     className={`${i === 0 ? 'active' : ''}`}
                   />
                 );
@@ -42,7 +43,7 @@ class Slideshow extends React.Component {
             <div className='carousel-inner'>
               {data.map((album, i) => {
                 return (
-                  <div className={`carousel-item ${i === 0 ? 'active' : ''}`}>
+                  <div key={i} className={`carousel-item ${i === 0 ? 'active' : ''}`}>
                     <img
                       className=' d-block w-100'
                       src={album.images[0].source}

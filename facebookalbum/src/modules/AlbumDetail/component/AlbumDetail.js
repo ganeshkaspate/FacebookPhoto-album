@@ -27,8 +27,8 @@ class AlbumDetail extends React.Component {
          className="btn btn-primary mt-2">View as Slideshow</button>
         <hr />
         <div className='album-pictures-wrapper d-flex justify-content-center'>
-          {data.map(album => {
-            return <img className='album-picture m-2' src={album.images[0].source} alt="album" />;
+          {data.map((album,i) => {
+            return <img className='album-picture m-2' src={album.images[0].source} alt="album" key={i} />;
           })}
         </div>
       </div>
