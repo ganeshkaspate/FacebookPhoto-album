@@ -45,7 +45,7 @@ class Slideshow extends React.Component {
                 return (
                   <div key={i} className={`carousel-item ${i === 0 ? 'active' : ''}`}>
                     <img
-                      className=' d-block w-100'
+                      className=' d-block h-100'
                       src={album.images[0].source}
                       alt='album'
                     />
