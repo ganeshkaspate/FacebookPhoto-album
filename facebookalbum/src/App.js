@@ -15,10 +15,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    if (localStorage.getItem('accessToken')) {
-      this.setState({ authenticated: true });
-    }
-
     facebookAPI.checkLoginStatus(response => {
       // Here I am getting status UNKNOWN even if user is logged in. 
       if (response.status !== 'connected') {
